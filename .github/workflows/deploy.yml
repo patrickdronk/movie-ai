@@ -45,7 +45,7 @@ jobs:
         run: docker tag movie-ai:0.0.1-SNAPSHOT ghcr.io/${{ github.repository_owner }}/movie-ai:${{ github.sha }}
 
       - name: Push Docker image
-        run: docker push ghcr.io/${{ github.repository_owner }}/axon:${{ github.sha }}
+        run: docker push ghcr.io/${{ github.repository_owner }}/movie-ai:${{ github.sha }}
 
       - name: Deploy to dokku
         uses: dokku/github-action@master
