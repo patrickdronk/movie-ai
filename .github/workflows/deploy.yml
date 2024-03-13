@@ -50,6 +50,6 @@ jobs:
       - name: Deploy to dokku
         uses: dokku/github-action@master
         with:
-          git_remote_url: 'ssh://patrick@patrickdronk.dev:22/movie-ai-api'
+          git_remote_url: 'ssh://dokku@patrickdronk.dev:22/movie-ai-api'
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
           deploy_docker_image: ghcr.io/${{ github.repository_owner }}/movie-ai-api:${{ github.sha }}
