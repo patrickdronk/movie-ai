@@ -22,7 +22,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(authorize -> authorize.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll().anyRequest().authenticated()).csrf(AbstractHttpConfigurer::disable).oauth2ResourceServer(oauth2 -> oauth2.jwt(withDefaults())).cors(cors -> cors.configurationSource(request -> {
             var config = new CorsConfiguration();
-            config.setAllowedOrigins(List.of("http://localhost:5173"));
+            config.setAllowedOrigins(List.of("http://localhost:5173", "https://movie-ai.patrickdronk.dev"));
             config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
             config.setAllowedHeaders(List.of("Authorization", "Content-Type"));
             return config;
