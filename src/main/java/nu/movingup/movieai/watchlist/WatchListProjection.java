@@ -8,7 +8,6 @@ import org.axonframework.queryhandling.QueryHandler;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
-import java.util.UUID;
 
 @Component
 @ProcessingGroup("WatchListProjection")
@@ -21,7 +20,8 @@ public class WatchListProjection {
 
     @EventHandler
     public void on(WatchListCreatedEvent event) {
-        var watchListViewModel = new WatchListViewModel(UUID.randomUUID(), event.userId());
+        System.out.println("HERRE");
+        var watchListViewModel = new WatchListViewModel(event.id(), event.userId());
         watchListRepository.save(watchListViewModel);
     }
 

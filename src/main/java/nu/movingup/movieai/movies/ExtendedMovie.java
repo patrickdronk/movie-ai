@@ -1,7 +1,5 @@
 package nu.movingup.movieai.movies;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public record ExtendedMovie(
         String title,
         String year,

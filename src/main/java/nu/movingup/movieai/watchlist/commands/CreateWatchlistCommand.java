@@ -1,5 +1,6 @@
 package nu.movingup.movieai.watchlist.commands;
 
-import java.util.UUID;
+import io.soabase.recordbuilder.core.RecordBuilder;
 
-public record CreateWatchlistCommand(UUID id, UUID userId) {}
+@RecordBuilder
+public record CreateWatchlistCommand(String id, String userId) implements CreateWatchlistCommandBuilder.With {}

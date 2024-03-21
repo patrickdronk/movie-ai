@@ -5,10 +5,12 @@ import nu.movingup.movieai.watchlist.commands.CreateWatchlistCommand;
 import nu.movingup.movieai.watchlist.queries.GetWatchListByUserId;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.axonframework.queryhandling.QueryGateway;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Optional;
-import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
 import static org.axonframework.messaging.responsetypes.ResponseTypes.optionalInstanceOf;
@@ -25,12 +27,13 @@ public class WatchListController {
     }
 
     @GetMapping("/watchlist")
-    public CompletableFuture<Optional<WatchListViewModel>> getWatchListByUserId(@UserId UUID userId) {
+    public CompletableFuture<Optional<WatchListViewModel>> getWatchListByUserId(@UserId String userId) {
         return queryGateway.query(new GetWatchListByUserId(userId), optionalInstanceOf(WatchListViewModel.class));
     }
 
     @PostMapping("/watchlist")
-    public void handle(@RequestBody CreateWatchlistCommand command) {
+    public void handle(@RequestBody CreateWatchlistCommand command, @UserId String userId) {
+        command = command.withUserId(userId);
         commandGateway.send(command);
     }
 }

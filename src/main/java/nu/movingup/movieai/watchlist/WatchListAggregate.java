@@ -7,15 +7,13 @@ import org.axonframework.eventsourcing.EventSourcingHandler;
 import org.axonframework.modelling.command.AggregateIdentifier;
 import org.axonframework.spring.stereotype.Aggregate;
 
-import java.util.UUID;
-
 import static org.axonframework.modelling.command.AggregateLifecycle.apply;
 
 @Aggregate
 public class WatchListAggregate {
 
     @AggregateIdentifier
-    private UUID watchListId;
+    private String watchListId;
 
     public WatchListAggregate() {
     }

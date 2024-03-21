@@ -1,11 +1,12 @@
 package nu.movingup.movieai.watchlist;
 
-import org.springframework.data.annotation.Id;
+import io.soabase.recordbuilder.core.RecordBuilder;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.UUID;
-
+@Document
+@RecordBuilder
 public record WatchListViewModel(
-        @Id UUID watchListId,
-        UUID userId
+        String watchListId,
+        String userId
 ) {
 }
