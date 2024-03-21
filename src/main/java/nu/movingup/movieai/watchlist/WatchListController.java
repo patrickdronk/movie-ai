@@ -1,6 +1,7 @@
 package nu.movingup.movieai.watchlist;
 
 import nu.movingup.movieai.configuration.userIdConfig.UserId;
+import nu.movingup.movieai.watchlist.commands.AddMovieToWatchListCommand;
 import nu.movingup.movieai.watchlist.commands.CreateWatchlistCommand;
 import nu.movingup.movieai.watchlist.queries.GetWatchListByUserId;
 import org.axonframework.commandhandling.gateway.CommandGateway;
@@ -34,6 +35,11 @@ public class WatchListController {
     @PostMapping("/watchlist")
     public void handle(@RequestBody CreateWatchlistCommand command, @UserId String userId) {
         command = command.withUserId(userId);
+        commandGateway.send(command);
+    }
+
+    @PostMapping("/watchlist/add-movie-to-watchlist")
+    public void handle(@RequestBody AddMovieToWatchListCommand command) {
         commandGateway.send(command);
     }
 }
