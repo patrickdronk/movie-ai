@@ -1,5 +1,6 @@
 package nu.movingup.movieai.watchlist;
 
+import nu.movingup.movieai.watchlist.events.MovieAddedToWatchListEvent;
 import nu.movingup.movieai.watchlist.events.WatchListCreatedEvent;
 import nu.movingup.movieai.watchlist.queries.GetWatchListByUserId;
 import org.axonframework.config.ProcessingGroup;
@@ -7,7 +8,12 @@ import org.axonframework.eventhandling.EventHandler;
 import org.axonframework.queryhandling.QueryHandler;
 import org.springframework.stereotype.Component;
 
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
+
+import static java.util.Collections.*;
 
 @Component
 @ProcessingGroup("WatchListProjection")
@@ -20,9 +26,19 @@ public class WatchListProjection {
 
     @EventHandler
     public void on(WatchListCreatedEvent event) {
-        System.out.println("HERRE");
-        var watchListViewModel = new WatchListViewModel(event.id(), event.userId());
+        var watchListViewModel = new WatchListViewModel(event.id(), event.userId(), emptySet());
         watchListRepository.save(watchListViewModel);
+    }
+
+    @EventHandler
+    public void on(MovieAddedToWatchListEvent event) {
+        var watchList = watchListRepository.findById(event.watchListId());
+        watchList.ifPresent(wl -> {
+            Set<String> movieIds = new HashSet<>(wl.movieIds());
+            movieIds.add(event.imdbId());
+            wl = wl.withMovieIds(movieIds);
+            watchListRepository.save(wl);
+        });
     }
 
     @QueryHandler
