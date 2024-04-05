@@ -3,17 +3,13 @@ package nu.movingup.movieai.watchlist;
 import nu.movingup.movieai.configuration.userIdConfig.UserId;
 import nu.movingup.movieai.watchlist.commands.AddMovieToWatchListCommand;
 import nu.movingup.movieai.watchlist.commands.CreateWatchlistCommand;
-import nu.movingup.movieai.watchlist.queries.GetBalanceQuery;
 import nu.movingup.movieai.watchlist.queries.GetWatchListByUserId;
 import org.axonframework.commandhandling.gateway.CommandGateway;
-import org.axonframework.messaging.responsetypes.ResponseTypes;
 import org.axonframework.queryhandling.QueryGateway;
-import org.springframework.http.codec.ServerSentEvent;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import reactor.core.publisher.Flux;
 
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;

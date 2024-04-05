@@ -2,18 +2,13 @@ package nu.movingup.movieai.watchlist;
 
 import nu.movingup.movieai.watchlist.events.MovieAddedToWatchListEvent;
 import nu.movingup.movieai.watchlist.events.WatchListCreatedEvent;
-import nu.movingup.movieai.watchlist.queries.GetBalanceQuery;
 import nu.movingup.movieai.watchlist.queries.GetWatchListByUserId;
 import org.axonframework.config.ProcessingGroup;
 import org.axonframework.eventhandling.EventHandler;
 import org.axonframework.queryhandling.QueryHandler;
-import org.axonframework.queryhandling.QueryUpdateEmitter;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.*;
-import java.util.concurrent.ThreadLocalRandom;
-import java.util.function.Predicate;
 
 import static java.util.Collections.*;
 
